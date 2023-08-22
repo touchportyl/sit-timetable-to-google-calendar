@@ -3,12 +3,14 @@ Manually extract the timetable as HTML from the IN4SIT webpage and parse it into
 The file generated should be a .csv which can be imported into Google Calendar.
 
 # How to use
-1. Log into IN4SIT
-2. Open the shortcut
-3. Open Inspect Element (CTRL + SHIFT + I)
-4. Copy the <body> and paste it in 'source.txt'
-5. Run convert.py (double click)
-6. Import 'output.csv' into Google Calendar
+0. Install python lmao
+1. Download convert.py and create a 'source.txt' file in the same directory
+2. Log into IN4SIT
+3. Open the (shortcut)[https://in4sit.singaporetech.edu.sg/psc/CSSISSTD/EMPLOYEE/SA/c/SA_LEARNER_SERVICES.SSR_SSENRL_LIST.GBL] in the same browser
+4. Open Inspect Element (CTRL + SHIFT + I)
+5. Copy the <body> and paste it in 'source.txt'
+6. Run convert.py (double click)
+7. Import 'output.csv' into Google Calendar
 
 # How it works
 0. Magic
@@ -20,14 +22,15 @@ The file generated should be a .csv which can be imported into Google Calendar.
 
 # Alternatives (but they didn't work for me lolz)
 [SIT Timetable Grabber](https://chrome.google.com/webstore/detail/sit-timetable-grabber/cnffedmfildfgejcckjcmhabbdkpcibh/)
+
 [Timetable Grabber - SIT](https://github.com/JustBrandonLim/timetable-grabber-sit)
 
 # Credits
-I made it. Thanks to stackoverflow and 
+I made it. Thanks to Google and stackoverflow for answering my questions. No thanks to the school for not having an option to export as CSV/ICS.
 
 ---
 
-# dev notes
+# dev notes pls ignore
 
 ## CSV Headers
 ! Remember: Surround data with " if it has commas
