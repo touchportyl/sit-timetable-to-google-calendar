@@ -8,7 +8,7 @@ The file generated should be a .csv which can be imported into Google Calendar.
 2. Log into IN4SIT
 3. Open the [shortcut](https://in4sit.singaporetech.edu.sg/psc/CSSISSTD/EMPLOYEE/SA/c/SA_LEARNER_SERVICES.SSR_SSENRL_LIST.GBL) in the same browser
 4. Open Inspect Element (CTRL + SHIFT + I)
-5. Copy the <body> and paste it in 'source.txt'
+5. Copy the \<body\> and paste it in 'source.txt'
 6. Run convert.py (double click)
 7. Import 'output.csv' into Google Calendar
 
