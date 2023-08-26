@@ -10,10 +10,6 @@ regex5 = r'Graded|(Pass / Fail)' # get graded status
 regex6 = r'ALL|[LPW][0-9]' # get section
 regex7 = r'[MTWFS][ouehra] [0-2][0-9]:[0-5][0-9] - [0-2][0-9]:[0-5][0-9]' # get time
 
-# run any spellchecks here
-def Spellcheck():
-  line = line.replace('Integrated Work Study Programm', 'Integrated Work Study Programme')
-
 
 
 
@@ -33,7 +29,7 @@ for line in sourcefile:
   line = sub(regex2, 'and', line)
 
   # spellcheck
-  Spellcheck()
+  line = line.replace('Integrated Work Study Programm', 'Integrated Work Study Programme')
 
   # ignore top lines until "Select Display Option"
   if line == 'Select Display Option\n':
