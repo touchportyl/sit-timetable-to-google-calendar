@@ -8,7 +8,8 @@ regex3 = r'[A-Z]{3} [0-9]{4}.*(?= -)' # selects course ids "CSD 1101" or "CSD 49
 regex4 = r'Status|Units|Grading|Deadlines|Class Nbr|Section|Component|Days and Times|Room|Instructor|Start/End Date'
 regex5 = r'Graded|(Pass / Fail)' # get graded status
 regex6 = r'ALL|[LPW][0-9]' # get section
-regex7 = r'[MTWFS][ouehra] [0-2][0-9]:[0-5][0-9] - [0-2][0-9]:[0-5][0-9]' # get time
+#regex7 = r'[MTWFS][ouehra] [0-2][0-9]:[0-5][0-9] - [0-2][0-9]:[0-5][0-9]' # get time (specifically 24h time only)
+regex8 = r'[MTWFS][ouehra] [0-2]?[0-9]:[0-5][0-9](AM|PM)? - [0-2]?[0-9]:[0-5][0-9](AM|PM)?' # get time
 
 
 
@@ -126,6 +127,9 @@ for index, file in enumerate(datareadyfiles):
   # ignore first file
   if index == 0: continue
 
+  # ignore dropped classes
+  if 'Dropped\n' in file: continue
+
   # get course info
   course_info = courses[index]
   ## get name of course
@@ -150,20 +154,51 @@ for index, file in enumerate(datareadyfiles):
     if section == '': continue
 
     # get time (start class block)
-    search7 = search(regex7, line)
-    if search7 is not None:
-      time = line.rstrip()
-      # split
-      start_time = time[3:8]
-      end_time = time[-5:]
+    #search7 = search(regex7, line)
+    search8 = search(regex8, line)
+    if search8 is not None:
+      # get time
+      if 'AM' or 'PM' in search8: # 12h clock
+        time = line.rstrip()
+        # split
+        splittime = time.split(' ')
+        del splittime[2]
+        del splittime[0]
+        # convert to 24h
+        for i, time in enumerate(splittime):
+          if 'PM' in time:
+            hour_minute = time.split(':')
+            newtime = str(int(hour_minute[0]) + 12) + ':' + hour_minute[1][:2]
+          else:
+            newtime = time.replace('AM', '')
+            if len(newtime) == 4: # turn 9:00 to 09:00
+              newtime = '0' + newtime
+          splittime[i] = newtime
+
+        start_time = splittime[0]
+        end_time = splittime[1]
+      else: # 24h clock
+        time = line.rstrip()
+        # split
+        start_time = time[3:8]
+        end_time = time[-5:]
 
       # get room
       location = file[index+1].rstrip()
       # get instructor
-      instructor = file[index+2].rstrip().replace(' .','')
+      if ',' in file[index+2]: # for the stupid case where there's TWO lecturers for one class
+        getfile = file[index+2].rstrip() + ' ' + file[index+3]
+        twoinstructors = True
+      else: # expected outcome
+        getfile = file[index+2]
+        twoinstructors = False
+      instructor = getfile.rstrip().replace(' .','')
 
       # get date
-      date = file[index+3].rstrip().split(' - ')
+      if twoinstructors:
+        date = file[index+4].rstrip().split(' - ')
+      else:
+        date = file[index+3].rstrip().split(' - ')
       # split
       start_date = date[0]
       end_date = date[1]
