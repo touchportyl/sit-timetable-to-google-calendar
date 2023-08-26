@@ -2,6 +2,9 @@
 Manually extract the timetable as HTML from the IN4SIT webpage and parse it into a csv.
 The file generated should be a .csv which can be imported into Google Calendar.
 
+# Important Note!
+There are constant updates and changes to the timetable. Import the csv file into a NEW CALENDAR. Updating it is as simple as deleting the old calendar and re-importing the updated csv.
+
 # How to use
 0. Install python lmao
 1. Download convert.py and create a 'source.txt' file in the same directory
@@ -9,7 +12,7 @@ The file generated should be a .csv which can be imported into Google Calendar.
 3. Open the [shortcut](https://in4sit.singaporetech.edu.sg/psc/CSSISSTD/EMPLOYEE/SA/c/SA_LEARNER_SERVICES.SSR_SSENRL_LIST.GBL) in the same browser
 4. Open Inspect Element (CTRL + SHIFT + I)
 5. Copy the \<body\> and paste it in 'source.txt'
-6. Run convert.py (double click)
+6. Double click 'run.bat'
 7. Import 'output.csv' into Google Calendar
 
 # How it works

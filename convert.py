@@ -118,7 +118,7 @@ def ConstructCSVLine():
 
   # build csv line
   #return ','.join(subject, start_date, start_time, end_date, end_time, all_day_event, description, location, private)
-  return f'{subject},{start_date},{start_time},{end_date},{end_time},{all_day_event},{description},{location},{private}\n'
+  return f'{subject},{start_date},{start_time},{end_date},{end_time},{all_day_event},"{description}",{location},{private}\n'
 
 
 
