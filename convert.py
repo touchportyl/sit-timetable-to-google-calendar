@@ -31,6 +31,7 @@ for line in sourcefile:
 
   # spellcheck
   line = line.replace('Integrated Work Study Programm', 'Integrated Work Study Programme')
+  line = line.replace('Critical Thinking and Communic', 'Critical Thinking and Communication')
 
   # ignore top lines until "Select Display Option"
   if line == 'Select Display Option\n':
@@ -185,20 +186,22 @@ for index, file in enumerate(datareadyfiles):
 
       # get room
       location = file[index+1].rstrip()
+
       # get instructor
-      if ',' in file[index+2]: # for the stupid case where there's TWO lecturers for one class
-        getfile = file[index+2].rstrip() + ' ' + file[index+3]
-        twoinstructors = True
-      else: # expected outcome
-        getfile = file[index+2]
-        twoinstructors = False
-      instructor = getfile.rstrip().replace(' .','')
+      instructor_count = 1
+      getfile = file[index+2].rstrip().replace(' .','')
+      while ',' in file[index+1+instructor_count]:
+        getfile += ' ' + file[index+2+instructor_count].rstrip().replace(' .','')
+        instructor_count += 1
+
+      # if there's a comma as the last character, remove it
+      if ',' in getfile[-1]:
+        instructor = getfile[:-1]
+      else:
+        instructor = getfile
 
       # get date
-      if twoinstructors:
-        date = file[index+4].rstrip().split(' - ')
-      else:
-        date = file[index+3].rstrip().split(' - ')
+      date = file[index+2+instructor_count].rstrip().split(' - ')
       # split
       start_date = date[0]
       end_date = date[1]
@@ -206,7 +209,6 @@ for index, file in enumerate(datareadyfiles):
       # for each class block, write a csvline with data from above
       csvline = ConstructCSVLine()
       csvlines.append(csvline)
-
 
 
 # write to output
