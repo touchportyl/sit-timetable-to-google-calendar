@@ -1,4 +1,4 @@
+archive/
 test data/
-source.txt
-output.csv
-old.csv
+*.txt
+*.csv
