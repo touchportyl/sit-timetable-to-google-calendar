@@ -1,6 +1,6 @@
 # csv file comparer, taken from https://stackoverflow.com/a/38996374
 
-with open('old.csv', 'r') as f1, open('output.csv', 'r') as f2:
+with open('output.csv', 'r') as f1, open('output - Copy.csv', 'r') as f2:
     fileone = f1.readlines()
     filetwo = f2.readlines()
 
