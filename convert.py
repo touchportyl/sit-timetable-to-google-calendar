@@ -7,7 +7,7 @@ regex2 = r'&amp;'
 regex3 = r'[A-Z]{3} [0-9]{4}.*(?= -)' # selects course ids "CSD 1101" or "CSD 4902A"
 regex4 = r'Status|Units|Grading|Deadlines|Class Nbr|Section|Component|Days and Times|Room|Instructor|Start/End Date'
 regex5 = r'Graded|(Pass / Fail)' # get graded status
-regex6 = r'ALL|[LPW][0-9]' # get section
+regex6 = r'ALL|[LPWSQ][0-9]+' # get section
 #regex7 = r'[MTWFS][ouehra] [0-2][0-9]:[0-5][0-9] - [0-2][0-9]:[0-5][0-9]' # get time (specifically 24h time only)
 regex8 = r'[MTWFS][ouehra] [0-2]?[0-9]:[0-5][0-9](AM|PM)? - [0-2]?[0-9]:[0-5][0-9](AM|PM)?' # get time
 
