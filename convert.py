@@ -32,6 +32,7 @@ for line in sourcefile:
   # spellcheck
   line = line.replace('Integrated Work Study Programm', 'Integrated Work Study Programme')
   line = line.replace('Critical Thinking and Communic', 'Critical Thinking and Communication')
+  line = line.replace('Interdisciplinary Design Innov', 'Interdisciplinary Design Innovation')
 
   # ignore top lines until "Select Display Option"
   if line == 'Select Display Option\n':
@@ -169,7 +170,10 @@ for index, file in enumerate(datareadyfiles):
         for i, time in enumerate(splittime):
           if 'PM' in time:
             hour_minute = time.split(':')
-            newtime = str(int(hour_minute[0]) + 12) + ':' + hour_minute[1][:2]
+            if hour_minute[0] != '12':
+              newtime = str(int(hour_minute[0]) + 12) + ':' + hour_minute[1][:2]
+            else:
+              newtime = time.replace('PM', '')
           else:
             newtime = time.replace('AM', '')
             if len(newtime) == 4: # turn 9:00 to 09:00
