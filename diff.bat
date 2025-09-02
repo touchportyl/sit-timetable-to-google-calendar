@@ -1,2 +1,2 @@
 @echo off
-compare.py
+python compare.py

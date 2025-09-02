@@ -1,2 +1,2 @@
 @echo off
-convert.py
+python convert.py
